@@ -1,7 +1,7 @@
 {
   "name": "pandoc-convert",
   "main": "./lib/init",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "repository": "https://github.com/josa42/atom-pandoc-convert",
   "license": "MIT",
