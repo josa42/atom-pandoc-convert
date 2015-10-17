@@ -7,6 +7,11 @@
 Convert files from one markup format into another using pandoc. See
 [pandoc.org](http://pandoc.org/) for more information.
 
+**Warning**: The installation can may take a while, since it is installing padoc
+via the npm package [pandoc-bin](https://www.npmjs.com/package/pandoc-bin).
+
+![](screenshot.gif)
+
 ## Commands
 
 | Command                          | Format                | Extension |
