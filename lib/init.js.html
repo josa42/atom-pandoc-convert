@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!-- configuration parameters -->
+  <meta name="defaultView" content="slideshow" />
+  <meta name="controlVis" content="hidden" />
+  <!-- style sheet links -->
+  <link rel="stylesheet" href="s5/default/slides.css" type="text/css" media="projection" id="slideProj" />
+  <link rel="stylesheet" href="s5/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+  <link rel="stylesheet" href="s5/default/print.css" type="text/css" media="print" id="slidePrint" />
+  <link rel="stylesheet" href="s5/default/opera.css" type="text/css" media="projection" id="operaFix" />
+  <!-- S5 JS -->
+  <script src="s5/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header"></div>
+<div id="footer">
+  <h1></h1>
+  <h2></h2>
+</div>
+</div>
+<div class="presentation">
+<div class="slide section level6">
+
+<p>&quot;use babel&quot;</p>
+<p>import { existsSync } from 'fs' import { CompositeDisposable } from 'atom' import { execFile } from 'child_process' import { dirname } from 'path' import pandocBin from 'pandoc-bin' import targets from './targets' import SelectPathView from './views/select-path-view'</p>
+<p>const { commands, config, notifications, workspace } = atom</p>
+<p>const cache = {}</p>
+<p>module.exports = {</p>
+<p>config: { pandocBinary: { description: 'Path to your <code>pandoc</code> binary. Default is the packaged version of pandoc.', type: 'string', default: '' } },</p>
+<p>activate() { if (atom.inDevMode() &amp;&amp; !atom.inSpecMode()) { console.log('activate pandoc-convert') }</p>
+<pre><code>this.subscriptions = new CompositeDisposable()
+this.selectPathView = new SelectPathView()
+
+Object.keys(targets).forEach(target =&gt; {
+  const action = `pandoc-convert:${target.replace(/_/g, &#39;-&#39;)}`
+
+  this.subscriptions.add(commands.add(&#39;atom-workspace&#39;, action, () =&gt; {
+    this.convertCommand(target)
+  }))
+})</code></pre>
+<p>},</p>
+<p>deactivate() { this.subscriptions.dispose() },</p>
+<p>convertCommand(target) {</p>
+<pre><code>const editor = workspace.getActiveTextEditor()
+
+if (!editor) {
+  return this.error(`Current item is not an editor.`)
+}
+
+if (editor.isModified() || !editor.getPath()) {
+  return this.error(`Text is modified. Please safe first.`)
+}
+
+const format = targets[target].format || target
+const ext = targets[target].ext
+const dpath = this.defaultOuputPath(ext)
+const ipath = editor.getPath()
+
+this.selectPathView.show(dpath, opath =&gt; {
+  cache[dpath] = opath
+  this.convert(format, ipath, opath)
+})</code></pre>
+<p>},</p>
+<p>error(message) { notifications.addError(<code>[pandoc-convert]&lt;br&gt;${message}</code>) },</p>
+<p>success(message) { notifications.addSuccess(<code>[pandoc-convert]&lt;br&gt;${message}</code>) },</p>
+<p>convert(format, ipath, opath) {</p>
+<pre><code>const pandocPath = config.get(&#39;pandoc-convert.pandocBinary&#39;) || pandocBin.path
+
+if (!existsSync(pandocPath)) {
+  return this.error(`Binary \`${pandocPath}\` does not exist.`)
+}
+
+const cwd = dirname(ipath)
+
+execFile(pandocPath, [
+  &#39;--standalone&#39;,
+  `--to=${format}`,
+  `--output=${opath}`,
+  ipath
+], { cwd }, (error) =&gt; {
+  if (error) {
+    this.error(error.message)
+  } else {
+    this.success(`**Created:** \`${opath}\``)
+  }
+})</code></pre>
+<p>},</p>
+<p>defaultOuputPath(ext) { const editor = workspace.getActiveTextEditor() const dpath = <code>${editor.getPath()}.${ext}</code></p>
+<pre><code>if (cache[dpath]) {
+  return cache[dpath]
+}
+
+return dpath</code></pre>
+<p>} }</p>
+</div>
+</div>
+</body>
+</html>
