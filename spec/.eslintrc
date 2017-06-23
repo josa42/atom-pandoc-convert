@@ -1,0 +1,12 @@
+{
+  "globals": {
+    "waitsFor": true,
+    "runs": true,
+    "expect": true,
+    "jasmine": true
+  },
+  "env": {
+    "mocha": true,
+    "atomtest": true
+  }
+}

@@ -6,7 +6,7 @@
   "repository": "https://github.com/josa42/atom-pandoc-convert",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=1.13.0 <2.0.0"
   },
   "dependencies": {
     "pandoc-bin": "^0.2.0",
