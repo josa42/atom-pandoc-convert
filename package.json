@@ -9,7 +9,7 @@
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "pandoc-bin": "^0.2.0",
+    "simple-pandoc": "^0.2.0",
     "atom-quick-input": "^0.1.1"
   },
   "devDependencies": {
