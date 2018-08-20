@@ -1,12 +1,12 @@
 {
   "name": "pandoc-convert",
   "main": "./lib/init",
-  "version": "1.1.2",
+  "version": "1.1.1",
   "description": "Convert files from one markup format into another using pandoc.",
   "repository": "https://github.com/josa42/atom-pandoc-convert",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
     "simple-pandoc": "^0.2.0",
