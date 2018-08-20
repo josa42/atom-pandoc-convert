@@ -1,5 +1,5 @@
 {
-  "name": "pandoc-convert-development",
+  "name": "pandoc-convert",
   "main": "./lib/init",
   "version": "1.1.1",
   "description": "Convert files from one markup format into another using pandoc.",
