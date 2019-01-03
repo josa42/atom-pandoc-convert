@@ -7,7 +7,7 @@
 Convert files from one markup format into another using pandoc. See
 [pandoc.org](http://pandoc.org/) for more information.
 
-**Warning**: The installation can may take a while, since it is installing padoc
+**Warning**: The installation can may take a while, since it is installing pandoc
 via the npm package [pandoc-bin](https://www.npmjs.com/package/pandoc-bin).
 
 ![](https://raw.githubusercontent.com/josa42/atom-pandoc-convert/master/screenshot.gif)
