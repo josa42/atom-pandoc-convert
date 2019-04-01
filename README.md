@@ -3,6 +3,13 @@
 [![Plugin installs!](https://img.shields.io/apm/dm/pandoc-convert.svg?style=flat-square)](https://atom.io/packages/pandoc-convert)
 [![Package version!](https://img.shields.io/apm/v/pandoc-convert.svg?style=flat-square)](https://atom.io/packages/pandoc-convert)
 [![Dependencies!](https://img.shields.io/david/josa42/atom-pandoc-convert.svg?style=flat-square)](https://david-dm.org/josa42/atom-pandoc-convert)
+![Project: Not maintained](https://img.shields.io/badge/Project-Not_maintained-red.svg)
+
+---
+
+**Note: the repository is not maintained. If you would like to take over, please open an issue!**
+
+---
 
 Convert files from one markup format into another using pandoc. See
 [pandoc.org](http://pandoc.org/) for more information.
